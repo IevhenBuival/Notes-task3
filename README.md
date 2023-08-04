@@ -3,8 +3,10 @@
 Here we have Rest API for Table Notes that stored in cloud Atlas Mongo DB
 
 link to api: https://notesapi-task3.azurewebsites.net/api
-I am using free Azure plan so first time loading may be about few minuts
+I am using free Azure plan so first time loading may be about few minuts,
+
 body example for POST and PATCH:
+
 {
 "title": "Example note",
 "content" :"this is my new with date 05/05/2015",
@@ -12,6 +14,7 @@ body example for POST and PATCH:
 "dates" :"05/05/2015",
 "archived" :false
 }
+
 all field in body must have
 
 ## Endpoints
