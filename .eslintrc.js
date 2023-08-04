@@ -6,10 +6,8 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
+  files: ['*.ts', '*.tsx'],
+  extends: [],
   root: true,
   env: {
     node: true,
