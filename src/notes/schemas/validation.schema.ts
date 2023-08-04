@@ -14,7 +14,7 @@ export const noteValidionSchema = yup
         else
           throw new yup.ValidationError(
             new yup.ValidationError(
-              'category may be only "Task" or "Idea" or "Random Thought"',
+              'Category may be only "Task" or "Idea" or "Random Thought"',
             ),
           );
       })
@@ -27,11 +27,13 @@ export const noteValidionSchema = yup
     const keySet = new Set(Object.keys(NoteSchema.obj));
     Object.keys(current).forEach((el) => {
       if (keySet.has(el) === false)
-        invalid.push(new yup.ValidationError(`field: "${el}" is not expected`));
+        invalid.push(new yup.ValidationError(`Field: "${el}" is not expected`));
     });
     keySet.forEach((el) => {
       if (current[el] === undefined)
-        invalid.push(new yup.ValidationError(`Field: "${el}" missed in body`));
+        invalid.push(
+          new yup.ValidationError(`Field: "${el}" is missed in the body`),
+        );
     });
     if (invalid.length > 0) throw new yup.ValidationError(invalid);
     return current;

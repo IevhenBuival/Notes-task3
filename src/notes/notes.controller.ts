@@ -8,7 +8,6 @@ import {
   Param,
   Patch,
   Post,
-  UseFilters,
   UsePipes,
 } from '@nestjs/common';
 import { CreateUpdateNoteDto } from './dto/create-update-note.dto';
@@ -17,10 +16,17 @@ import { NotesService } from './notes.service';
 import { Note } from './schemas/note.schemas';
 import { YupValidationPipe } from 'src/pipes/YupValidation';
 import { noteValidionSchema } from './schemas/validation.schema';
+import { ITotal } from 'src/types/ITotal';
 
 @Controller('notes')
 export class NotesController {
   constructor(private readonly notesService: NotesService) {}
+
+  @Get('/stats')
+  getStats(): Promise<ITotal[]> {
+    const rez: Promise<ITotal[]> = this.notesService.getStats();
+    return rez;
+  }
 
   @Post()
   @UsePipes(new YupValidationPipe(noteValidionSchema))
@@ -50,11 +56,6 @@ export class NotesController {
 
   @Get()
   getAll(): Promise<Note[]> {
-    return this.notesService.getAll();
-  }
-
-  @Get('stats')
-  getStats(): Promise<Note[]> {
     return this.notesService.getAll();
   }
 }
