@@ -1,4 +1,4 @@
-### Task-3 Notes endpoints
+# Task-3 Notes endpoints
 
 Here we have Rest API for Table Notes that stored in cloud Atlas Mongo DB
 
@@ -6,27 +6,27 @@ link to api:
 
 ## Endpoints
 
-# Create a note object:
+### Create a note object:
 
 POST /notes
 
-# Remove item:
+### Remove item:
 
 DELETE /notes/:id
 
-# Edit item:
+### Edit item:
 
 PATCH /notes/:id
 
-# Retrieve item:
+### Retrieve item:
 
 GET /notes/:id
 
-# Get all notes:
+### Get all notes:
 
 GET /notes
 
-# Get aggregated data statistics about number of archived and active notes by category:
+### Get aggregated data statistics about number of archived and active notes by category:
 
 GET /notes/stats
 
