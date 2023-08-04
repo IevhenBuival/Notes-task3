@@ -31,8 +31,9 @@ export class NotesController {
   @Post()
   @UsePipes(new YupValidationPipe(noteValidionSchema))
   @HttpCode(HttpStatus.CREATED)
-  Create(@Body() createNoteDto: CreateUpdateNoteDto): Promise<Note> {
-    return this.notesService.create(createNoteDto);
+  async Create(@Body() createNoteDto: CreateUpdateNoteDto): Promise<Note> {
+    const rez = this.notesService.create(createNoteDto);
+    return rez;
   }
 
   @Delete(':id')

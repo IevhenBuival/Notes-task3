@@ -23,7 +23,11 @@ export class NotesService {
   async getById(id: string): Promise<Note | null> {
     if (!mongoose.isValidObjectId(id))
       throw new HttpException('Invalid note ID', 404);
-    return this.noteModel.findById(id);
+    const searchedNote = await this.noteModel.findById(id);
+    if (!searchedNote) {
+      throw new HttpException('note with id is not found (id:' + id + ')', 404);
+    }
+    return searchedNote;
   }
 
   async create(noteDto: CreateUpdateNoteDto): Promise<Note> {
