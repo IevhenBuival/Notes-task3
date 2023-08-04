@@ -2,33 +2,34 @@
 
 Here we have Rest API for Table Notes that stored in cloud Atlas Mongo DB
 
-link to api:
+link to api: https://notesapi-task3.azurewebsites.net/api
+I am using free Azure plan so first time loading may be about few minuts
 
 ## Endpoints
 
 ### Create a note object:
 
-POST /notes
+POST https://notesapi-task3.azurewebsites.net/api/notes
 
 ### Remove item:
 
-DELETE /notes/:id
+DELETE https://notesapi-task3.azurewebsites.net/api/notes/:id
 
 ### Edit item:
 
-PATCH /notes/:id
+PATCH https://notesapi-task3.azurewebsites.net/api/notes/:id
 
 ### Retrieve item:
 
-GET /notes/:id
+GET https://notesapi-task3.azurewebsites.net/api/notes/:id
 
 ### Get all notes:
 
-GET /notes
+GET https://notesapi-task3.azurewebsites.net/api/notes
 
 ### Get aggregated data statistics about number of archived and active notes by category:
 
-GET /notes/stats
+GET https://notesapi-task3.azurewebsites.net/api/notes/stats
 
 ## Installation
 
