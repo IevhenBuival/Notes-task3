@@ -41,7 +41,7 @@ export class NotesService {
   }
 
   async remove(id: string): Promise<Note | null> {
-    this.isExistID(id);
+    await this.isExistID(id);
     return this.noteModel.findByIdAndRemove(id);
   }
 
