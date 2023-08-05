@@ -16,11 +16,7 @@ export class NotesService {
     this.Prepopulate();
   }
 
-  async getAll(): Promise<Note[]> {
-    return this.noteModel.find().exec();
-  }
-
-  async getById(id: string): Promise<Note | null> {
+  async isExistID(id: string) {
     if (!mongoose.isValidObjectId(id))
       throw new HttpException('Invalid note ID', 404);
     const searchedNote = await this.noteModel.findById(id);
@@ -30,24 +26,27 @@ export class NotesService {
     return searchedNote;
   }
 
+  async getAll(): Promise<Note[]> {
+    return await this.noteModel.find().exec();
+  }
+
+  async getById(id: string): Promise<Note | null> {
+    const searchedNote = await this.isExistID(id);
+    return searchedNote;
+  }
+
   async create(noteDto: CreateUpdateNoteDto): Promise<Note> {
     const newNote = new this.noteModel(noteDto);
     return newNote.save();
   }
 
   async remove(id: string): Promise<Note | null> {
-    if (!mongoose.isValidObjectId(id))
-      throw new HttpException('Invalid note ID', 404);
+    this.isExistID(id);
     return this.noteModel.findByIdAndRemove(id);
   }
 
   async update(id: string, noteDto: CreateUpdateNoteDto): Promise<Note> {
-    if (!mongoose.isValidObjectId(id))
-      throw new HttpException('Invalid note ID', 404);
-    const searchedNote = await this.noteModel.findById(id).exec();
-    if (!searchedNote) {
-      throw new HttpException('note with id is not found (id:' + id + ')', 404);
-    }
+    const searchedNote = await this.isExistID(id);
     Object.keys(noteDto).forEach((key) => {
       searchedNote[key] = noteDto[key];
     });
@@ -61,7 +60,7 @@ export class NotesService {
   }
 
   async Prepopulate() {
-    const existNotes = await this.noteModel.find().exec();
+    const existNotes = await this.getAll();
     if (existNotes.length === 0) {
       notes.map(async (el) => {
         await this.create(el);
